@@ -1,0 +1,154 @@
+[GPIO]
+# Initialize following GPIOs with given function and optional value
+# This is used during WebIOPi start process
+17 = OUT 0
+18 = OUT 0
+27 = OUT 0
+22 = OUT 0
+23 = OUT 0
+24 = OUT 0
+25 = OUT 0
+4 =  OUT 0
+10 = OUT 0
+9 =  OUT 0
+11 = OUT 0
+8 = IN
+7 = IN
+2 = IN
+3 = IN
+
+#ekki notað núna
+14 = IN
+15 = IN
+
+#------------------------------------------------------------------------#
+
+[~GPIO]
+# Reset following GPIOs with given function and optional value
+# This is used at the end of WebIOPi stop process
+17 = OUT 0
+18 = OUT 0
+27 = OUT 0
+22 = OUT 0
+23 = OUT 0
+24 = OUT 0
+25 = OUT 0
+4 =  OUT 0
+10 = OUT 0
+9 =  OUT 0
+11 = OUT 0
+8 = IN
+7 = IN
+2 = IN
+3 = IN
+14 = IN
+15 = IN
+
+#------------------------------------------------------------------------#
+
+[SCRIPTS]
+# Load custom scripts syntax :
+# name = sourcefile
+#   each sourcefile may have setup, loop and destroy functions and macros
+myscript = /home/pi/FiatLux/Scripts/LightScript.py
+
+#------------------------------------------------------------------------#
+
+[HTTP]
+# HTTP Server configuration
+enabled = true
+port = 8000
+doc-root = /home/pi/FiatLux
+
+# File containing sha256(base64("user:password"))
+# Use webiopi-passwd command to generate it
+passwd-file = /home/pi/FiatLux/passwd
+
+# Use welcome-file to change the default "Welcome" file
+#welcome-file = index.html
+
+#------------------------------------------------------------------------#
+
+[COAP]
+# CoAP Server configuration
+enabled = true
+port = 5683
+# Enable CoAP multicast
+multicast = true
+
+#------------------------------------------------------------------------#
+
+[DEVICES]
+# Device configuration syntax:
+# name = device [args...]
+#   name   : used in the URL mapping
+#   device : device name
+#   args   : (optional) see device driver doc
+# If enabled, devices configured here are mapped on REST API /device/name
+# Devices are also accessible in custom scripts using deviceInstance(name)
+# See device driver doc for methods and URI scheme available
+
+# Raspberry native UART on GPIO, uncomment to enable
+# Don't forget to remove console on ttyAMA0 in /boot/cmdline.txt
+# And also disable getty on ttyAMA0 in /etc/inittab
+#serial0 = Serial device:ttyAMA0 baudrate:9600
+
+# USB serial adapters
+#usb0 = Serial device:ttyUSB0 baudrate:9600
+#usb1 = Serial device:ttyACM0 baudrate:9600
+
+#temp0 = TMP102
+#temp1 = TMP102 slave:0x49
+#temp2 = DS18B20
+#temp3 = DS18B20 slave:28-0000049bc218
+
+#bmp = BMP085
+
+#gpio0 = PCF8574
+#gpio1 = PCF8574 slave:0x21
+
+#light0 = TSL2561T
+#light1 = TSL2561T slave:0b0101001
+
+#gpio0 = MCP23017
+#gpio1 = MCP23017 slave:0x21
+#gpio2 = MCP23017 slave:0x22
+
+#pwm0 = PCA9685
+#pwm1 = PCA9685 slave:0x41
+
+#adc = MCP3008
+#dac = MCP4922 chip:1
+
+#------------------------------------------------------------------------#
+
+[REST]
+# By default, REST API allows to GET/POST on all GPIOs
+# Use gpio-export to limit GPIO available through REST API  
+gpio-export = 17, 18, 27, 22, 23, 24, 25, 4, 10, 9, 11, 8, 7, 2, 3
+
+# Uncomment to forbid changing GPIO values 
+#gpio-post-value = false
+
+# Uncomment to forbid changing GPIO functions 
+gpio-post-function = false 
+
+# Uncomment to disable automatic device mapping
+device-mapping = false
+
+#------------------------------------------------------------------------#
+
+[ROUTES]
+/eldhus/utveggur 		= /GPIO/17/value
+/stofa/utveggur 		= /GPIO/18/value
+/eldhus/eyja 			= /GPIO/27/value
+/stofa/gangur 			= /GPIO/22/value
+/bordstofa/gangur 		= /GPIO/23/value
+/sjonvarpshol/gangur 	= /GPIO/24/value
+/bordstofa/bord 		= /GPIO/25/value
+/bordstofa/skapur 		= /GPIO/4/value
+/sjonvarpshol/skapur 	= /GPIO/10/value
+/bordstofa/utveggur 	= /GPIO/9/value
+/sjonvarpshol/utveggur 	= /GPIO/11/value
+
+
