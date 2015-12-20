@@ -67,18 +67,18 @@ def destroy():
 
 def readStatus(takki, takkaStada, takkaSafn):
     global Takki1Status, Takki2Status, Takki3Status, Takki4Status
-    webiopi.debug("Les stöðu " + str(takki) + " " + str(takkaStada))
+    webiopi.debug("Les stodu " + str(takki) + " " + str(takkaStada))
     Stada = GPIO.digitalRead(takki)
-    webiopi.debug("Staðan var " + str(Stada))
+    webiopi.debug("Stadan var " + str(Stada))
     if (Stada != takkaStada):
-        webiopi.debug("Breyti stöðu " + str(takki))
+        webiopi.debug("Breyti stodu " + str(takki))
         takkaStada = Stada
         toggleLights(takkaSafn)
 
 
 def toggleLights(takkaSafn):
     for light in takkaSafn:
-        webiopi.debug("Breyti ljósi " + str(light))
+        webiopi.debug("Breyti ljosi " + str(light))
         gildi = not GPIO.digitalRead(light)
         GPIO.digitalWrite(light, gildi)
 

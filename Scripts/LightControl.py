@@ -53,4 +53,4 @@ class LightSet:
         try:
             self.lightSet.remove(light)
         except KeyError:
-            webiopi.warn('Tried to remove light {0} from set where is wasn\'t present'.format(light))
+            webiopi.warn('Tried to remove light {0} from set where it wasn\'t present'.format(light))
